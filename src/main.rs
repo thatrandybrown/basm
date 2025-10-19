@@ -17,8 +17,24 @@ struct VirtualMachine {
 }
 
 fn main() {
-    let vm = VirtualMachine {registers: [0; NUM_REGISTERS], pc: 0, memory: [0; MEMORY_SIZE]};
+    let mut vm = VirtualMachine {registers: [0; NUM_REGISTERS], pc: 0, memory: [0; MEMORY_SIZE]};
     println!("Created a new Virtual Machine!");
     println!("PC start: {}", vm.pc);
     println!("Register 0: {}", vm.registers[0]);
+    println!("Registers count: {}", vm.registers.len());
+
+    let program = vec![];
+
+    // write program to memory
+    for (i, opcode) in program.iter().enumerate() {
+        vm.memory[i] = *opcode;
+    }
+
+    // execute program
+    for i in 0..program.len() {
+        let instruction = vm.memory[i];
+        // Decode and execute instruction
+    }
+
+    println!("Program execution completed!");
 }
