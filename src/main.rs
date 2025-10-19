@@ -11,5 +11,8 @@ struct VirtualMachine {
 }
 
 fn main() {
-    println!("Hello, world!");
+    let vm = VirtualMachine {registers: [0; NUM_REGISTERS], pc: 0, memory: [0; MEMORY_SIZE]};
+    println!("Created a new Virtual Machine!");
+    println!("PC start: {}", vm.pc);
+    println!("Register 0: {}", vm.registers[0]);
 }
