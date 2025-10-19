@@ -1,12 +1,18 @@
 const NUM_REGISTERS: usize = 8;
 const MEMORY_SIZE: usize = 256;
 
+#[derive(Debug)]
+#[repr(u8)]
+enum Opcode {
+    ADD = 0b00, // Add Rb to Ra, store in Ra
+    LOAD = 0b01, // Load value from address in Rb into Ra
+    STORE = 0b10, // Store value from Ra to address in Rb
+    BNE = 0b11, // Branch (skip next instruction) if Ra != Rb
+}
+
 struct VirtualMachine {
-    /// General-purpose registers R0 through R7
     registers: [u8; NUM_REGISTERS],
-    /// Program Counter - holds the address of the next instruction to execute
     pc: u8,
-    /// 256 bytes of RAM
     memory: [u8; MEMORY_SIZE],
 }
 
