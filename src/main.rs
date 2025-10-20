@@ -30,9 +30,11 @@ fn main() {
         vm.memory[i] = *opcode;
     }
 
-    // execute program
-    for i in 0..program.len() {
-        let instruction = vm.memory[i];
+    // execute program using pc
+    while vm.pc < program.len() as u8 {
+        let instruction = vm.memory[vm.pc as usize];
+        vm.pc += 1;
+        println!("Executing instruction at PC {}: {:08b}", vm.pc - 1, instruction);
         // Decode and execute instruction
     }
 
