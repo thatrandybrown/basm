@@ -39,6 +39,10 @@ fn main() {
         let opcode = instruction >> 6;
         if opcode == Opcode::ADD as u8 {
             println!("Add operation");
+            let register_a = (instruction >> 3) & 0b00000111;
+            let register_b = instruction & 0b00000111;
+            println!("Adding values from registers {} and {} into register {}", register_a, register_b, register_a);
+            vm.registers[register_a as usize] = vm.registers[register_a as usize] + vm.registers[register_b as usize];
         } else if opcode == Opcode::LOAD as u8 {
             println!("Load operation");
         } else if opcode == Opcode::STORE as u8 {
