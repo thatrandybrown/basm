@@ -36,6 +36,18 @@ fn main() {
         vm.pc += 1;
         println!("Executing instruction at PC {}: {:08b}", vm.pc - 1, instruction);
         // Decode and execute instruction
+        let opcode = instruction >> 6;
+        if opcode == Opcode::ADD as u8 {
+            println!("Add operation");
+        } else if opcode == Opcode::LOAD as u8 {
+            println!("Load operation");
+        } else if opcode == Opcode::STORE as u8 {
+            println!("Store operation");
+        } else if opcode == Opcode::BNE as u8 {
+            println!("Branch Not Equal operation");
+        } else {
+            println!("Unknown operation");
+        }
     }
 
     println!("Program execution completed!");
