@@ -45,6 +45,10 @@ fn main() {
             vm.registers[register_a as usize] = vm.registers[register_a as usize] + vm.registers[register_b as usize];
         } else if opcode == Opcode::LOAD as u8 {
             println!("Load operation");
+            let register_a = (instruction >> 3) & 0b00000111;
+            let register_b = instruction & 0b00000111;
+            println!("Loading value from register {} into register {}", register_b, register_a);
+            vm.registers[register_a as usize] = vm.memory[vm.registers[register_b as usize] as usize];
         } else if opcode == Opcode::STORE as u8 {
             println!("Store operation");
         } else if opcode == Opcode::BNE as u8 {
