@@ -44,7 +44,7 @@ fn main() {
         } else if opcode == Opcode::LOAD as u8 {
             vm.registers[register_a as usize] = vm.memory[vm.registers[register_b as usize] as usize];
         } else if opcode == Opcode::STORE as u8 {
-            println!("Store operation");
+            vm.memory[vm.registers[register_b as usize] as usize] = vm.registers[register_a as usize];
         } else if opcode == Opcode::BNE as u8 {
             println!("Branch Not Equal operation");
         } else {
