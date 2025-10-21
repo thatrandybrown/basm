@@ -7,7 +7,7 @@ enum Opcode {
     ADD = 0b00, // Add Rb to Ra, store in Ra
     LOAD = 0b01, // Load value from address in Rb into Ra
     STORE = 0b10, // Store value from Ra to address in Rb
-    BNE = 0b11, // Branch (skip next instruction) if Ra != Rb
+    BNE = 0b11, // Branch if Ra != Rb
 }
 
 struct VirtualMachine {
@@ -54,7 +54,9 @@ fn main() {
         } else {
             println!("Unknown operation");
         }
+        println!("Registers: {:?}", vm.registers);
     }
 
+    println!("Memory: {:?}", vm.memory);
     println!("Program execution completed!");
 }
