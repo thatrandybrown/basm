@@ -34,20 +34,14 @@ fn main() {
     while vm.pc < program.len() as u8 {
         let instruction = vm.memory[vm.pc as usize];
         vm.pc += 1;
-        println!("Executing instruction at PC {}: {:08b}", vm.pc - 1, instruction);
+        // println!("Executing instruction at PC {}: {:08b}", vm.pc - 1, instruction);
         // Decode and execute instruction
         let opcode = instruction >> 6;
+        let register_a = (instruction >> 3) & 0b00000111;
+        let register_b = instruction & 0b00000111;
         if opcode == Opcode::ADD as u8 {
-            println!("Add operation");
-            let register_a = (instruction >> 3) & 0b00000111;
-            let register_b = instruction & 0b00000111;
-            println!("Adding values from registers {} and {} into register {}", register_a, register_b, register_a);
             vm.registers[register_a as usize] = vm.registers[register_a as usize] + vm.registers[register_b as usize];
         } else if opcode == Opcode::LOAD as u8 {
-            println!("Load operation");
-            let register_a = (instruction >> 3) & 0b00000111;
-            let register_b = instruction & 0b00000111;
-            println!("Loading value from register {} into register {}", register_b, register_a);
             vm.registers[register_a as usize] = vm.memory[vm.registers[register_b as usize] as usize];
         } else if opcode == Opcode::STORE as u8 {
             println!("Store operation");
