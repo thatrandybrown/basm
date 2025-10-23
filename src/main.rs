@@ -54,9 +54,9 @@ fn main() {
         } else {
             println!("Unknown operation");
         }
-        println!("Registers: {:?}", vm.registers);
     }
 
+    println!("Registers: {:?}", vm.registers);
     println!("Memory: {:?}", vm.memory);
     println!("Program execution completed!");
 }
