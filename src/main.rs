@@ -4,10 +4,10 @@ const MEMORY_SIZE: usize = 256;
 #[derive(Debug)]
 #[repr(u8)]
 enum Opcode {
-    ADD = 0b00, // Add Rb to Ra, store in Ra
-    LOAD = 0b01, // Load value from address in Rb into Ra
+    ADD = 0b00,   // Add Rb to Ra, store in Ra
+    LOAD = 0b01,  // Load value from address in Rb into Ra
     STORE = 0b10, // Store value from Ra to address in Rb
-    BNE = 0b11, // Branch if Ra != Rb
+    BNE = 0b11,   // Branch if Ra != Rb
 }
 
 struct VirtualMachine {
@@ -17,7 +17,11 @@ struct VirtualMachine {
 }
 
 fn main() {
-    let mut vm = VirtualMachine {registers: [0; NUM_REGISTERS], pc: 0, memory: [0; MEMORY_SIZE]};
+    let mut vm = VirtualMachine {
+        registers: [0; NUM_REGISTERS],
+        pc: 0,
+        memory: [0; MEMORY_SIZE],
+    };
     println!("Created a new Virtual Machine!");
 
     let program = vec![];
@@ -33,11 +37,14 @@ fn main() {
         let register_a = (instruction >> 3) & 0b00000111;
         let register_b = instruction & 0b00000111;
         if opcode == Opcode::ADD as u8 {
-            vm.registers[register_a as usize] = vm.registers[register_a as usize] + vm.registers[register_b as usize];
+            vm.registers[register_a as usize] =
+                vm.registers[register_a as usize] + vm.registers[register_b as usize];
         } else if opcode == Opcode::LOAD as u8 {
-            vm.registers[register_a as usize] = vm.memory[vm.registers[register_b as usize] as usize];
+            vm.registers[register_a as usize] =
+                vm.memory[vm.registers[register_b as usize] as usize];
         } else if opcode == Opcode::STORE as u8 {
-            vm.memory[vm.registers[register_b as usize] as usize] = vm.registers[register_a as usize];
+            vm.memory[vm.registers[register_b as usize] as usize] =
+                vm.registers[register_a as usize];
         } else if opcode == Opcode::BNE as u8 {
             if vm.registers[register_a as usize] == vm.registers[register_b as usize] {
                 vm.pc += 1; // skip next instruction
