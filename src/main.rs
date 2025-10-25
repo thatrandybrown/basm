@@ -19,23 +19,16 @@ struct VirtualMachine {
 fn main() {
     let mut vm = VirtualMachine {registers: [0; NUM_REGISTERS], pc: 0, memory: [0; MEMORY_SIZE]};
     println!("Created a new Virtual Machine!");
-    println!("PC start: {}", vm.pc);
-    println!("Register 0: {}", vm.registers[0]);
-    println!("Registers count: {}", vm.registers.len());
 
     let program = vec![];
 
-    // write program to memory
     for (i, opcode) in program.iter().enumerate() {
         vm.memory[i] = *opcode;
     }
 
-    // execute program using pc
     while vm.pc < program.len() as u8 {
         let instruction = vm.memory[vm.pc as usize];
         vm.pc += 1;
-        // println!("Executing instruction at PC {}: {:08b}", vm.pc - 1, instruction);
-        // Decode and execute instruction
         let opcode = instruction >> 6;
         let register_a = (instruction >> 3) & 0b00000111;
         let register_b = instruction & 0b00000111;
