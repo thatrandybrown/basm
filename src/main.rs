@@ -22,6 +22,8 @@ fn main() {
         pc: 0,
         memory: [0; MEMORY_SIZE],
     };
+    let args: Vec<String> = std::env::args().collect();
+
     println!("Created a new Virtual Machine!");
 
     let program = vec![
