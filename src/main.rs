@@ -32,6 +32,9 @@ fn main() {
         .unwrap_or("");
 
     println!("Executing commands: {}", commands);
+
+    println!("{:?}", commands.as_bytes().to_vec());
+
     println!("Created a new Virtual Machine!");
 
     let program = vec![
