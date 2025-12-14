@@ -24,16 +24,16 @@ fn main() {
     };
     let args: Vec<String> = std::env::args().collect();
 
-    let commands = args
+    let instructions = args
         .iter()
         .skip(1)
         .find(|arg| !arg.starts_with("--"))
         .map(|s| s.as_str())
         .unwrap_or("");
 
-    println!("Executing commands: {}", commands);
+    println!("Executing instructions: {}", instructions);
 
-    println!("{:?}", commands.as_bytes().to_vec());
+    println!("{:?}", instructions.as_bytes().to_vec());
 
     println!("Created a new Virtual Machine!");
 
