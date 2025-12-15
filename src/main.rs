@@ -33,7 +33,7 @@ fn main() {
 
     println!("Executing instructions: {}", instructions);
 
-    println!("{:?}", instructions.split(',').filter_map(|s| s.trim().parse::<u8>().ok()).collect::<Vec<u8>>());
+    println!("Memory: {:?}", instructions.split(',').filter_map(|s| s.trim().parse::<u8>().ok()).collect::<Vec<u8>>());
 
     println!("Created a new Virtual Machine!");
 
