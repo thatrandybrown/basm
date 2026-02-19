@@ -31,12 +31,6 @@ fn main() {
         .map(|s| s.as_str())
         .unwrap_or("");
 
-    println!("Executing instructions: {}", instructions);
-
-    println!("Memory: {:?}", instructions.split(',').filter_map(|s| s.trim().parse::<u8>().ok()).collect::<Vec<u8>>());
-
-    println!("Created a new Virtual Machine!");
-
     /**
      *  cargo run -- 64,120,55,55,55,55,55,55,15,206,8,192,192,192,192,192,192,192,192,192,192,192,192,192,192,192,192,192,192,192,192,192,192,192,192,192,192,192,192,192,192,192,192,192,192,192,192,192,192,192,192,192,192,192,192,192,192,192,192,192,192,192,192,192,1
     **/
@@ -65,8 +59,6 @@ fn main() {
 
     //     0b00000001 //64
     // ];
-
-    // println!("Program: {:?}", program);
 
     for (i, opcode) in program.iter().enumerate() {
         vm.memory[i] = *opcode;
