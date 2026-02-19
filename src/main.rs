@@ -36,7 +36,6 @@ fn main() {
     **/
 
     let program = instructions.split(',').filter_map(|s| s.trim().parse::<u8>().ok()).collect::<Vec<u8>>();
-    // let program = instructions.as_bytes().to_vec();
 
     // let program = vec![
     //      // load 64, load 1
