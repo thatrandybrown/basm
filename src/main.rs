@@ -60,11 +60,7 @@ impl VirtualMachine {
 }
 
 fn main() {
-    let mut vm = VirtualMachine {
-        registers: [0; NUM_REGISTERS],
-        pc: 0,
-        memory: [0; MEMORY_SIZE],
-    };
+    let mut vm = VirtualMachine::new();
     let args: Vec<String> = std::env::args().collect();
 
     let instructions = args
