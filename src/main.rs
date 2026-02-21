@@ -16,6 +16,49 @@ struct VirtualMachine {
     memory: [u8; MEMORY_SIZE],
 }
 
+impl VirtualMachine {
+    fn new() -> Self {
+        VirtualMachine {
+            registers: [0; NUM_REGISTERS],
+            pc: 0,
+            memory: [0; MEMORY_SIZE],
+        }
+    }
+
+    fn execute(&mut self, program: &[u8]) -> &[u8; NUM_REGISTERS] {
+        for (i, opcode) in program.iter().enumerate() {
+            self.memory[i] = *opcode;
+        }
+
+        while self.pc < program.len() as u8 {
+            let instruction = self.memory[self.pc as usize];
+            self.pc += 1;
+            let opcode = instruction >> 6;
+            let register_a = (instruction >> 3) & 0b00000111;
+            let register_b = instruction & 0b00000111;
+            if opcode == Opcode::ADD as u8 {
+                self.registers[register_a as usize] =
+                    self.registers[register_a as usize] + self.registers[register_b as usize];
+            } else if opcode == Opcode::LOAD as u8 {
+                self.registers[register_a as usize] =
+                    self.memory[self.registers[register_b as usize] as usize];
+            } else if opcode == Opcode::STORE as u8 {
+                self.memory[self.registers[register_b as usize] as usize] =
+                    self.registers[register_a as usize];
+            } else if opcode == Opcode::BNE as u8 {
+                if self.registers[register_a as usize] == self.registers[register_b as usize] {
+                    self.pc += 1; // skip next instruction
+                } else {
+                    self.pc = self.memory[self.pc as usize]; // jump to next instruction
+                }
+            } else {
+                println!("Unknown operation");
+            }
+        }
+        &self.registers
+    }
+}
+
 fn main() {
     let mut vm = VirtualMachine {
         registers: [0; NUM_REGISTERS],
