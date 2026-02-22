@@ -55,6 +55,7 @@ impl VirtualMachine {
                 println!("Unknown operation");
             }
         }
+
         &self.registers
     }
 }
