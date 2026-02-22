@@ -76,7 +76,7 @@ fn main() {
 
     let program = instructions.split(',').filter_map(|s| s.trim().parse::<u8>().ok()).collect::<Vec<u8>>();
 
-    vm.execute(&program);
+    let output: &[u8; NUM_REGISTERS] = vm.execute(&program);
 
     println!("Registers: {:?}", vm.registers);
     println!("Memory: {:?}", vm.memory);
