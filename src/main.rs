@@ -76,6 +76,8 @@ fn main() {
 
     let program = instructions.split(',').filter_map(|s| s.trim().parse::<u8>().ok()).collect::<Vec<u8>>();
 
+    vm.execute(&program);
+
     for (i, opcode) in program.iter().enumerate() {
         vm.memory[i] = *opcode;
     }
