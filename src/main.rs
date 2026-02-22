@@ -78,7 +78,5 @@ fn main() {
 
     let output: &[u8; NUM_REGISTERS] = vm.execute(&program);
 
-    println!("Registers: {:?}", vm.registers);
-    println!("Memory: {:?}", vm.memory);
-    println!("Program execution completed!");
+    println!("Registers: {:?}", output);
 }
