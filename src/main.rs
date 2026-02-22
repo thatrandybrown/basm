@@ -78,36 +78,6 @@ fn main() {
 
     vm.execute(&program);
 
-    for (i, opcode) in program.iter().enumerate() {
-        vm.memory[i] = *opcode;
-    }
-
-    while vm.pc < program.len() as u8 {
-        let instruction = vm.memory[vm.pc as usize];
-        vm.pc += 1;
-        let opcode = instruction >> 6;
-        let register_a = (instruction >> 3) & 0b00000111;
-        let register_b = instruction & 0b00000111;
-        if opcode == Opcode::ADD as u8 {
-            vm.registers[register_a as usize] =
-                vm.registers[register_a as usize] + vm.registers[register_b as usize];
-        } else if opcode == Opcode::LOAD as u8 {
-            vm.registers[register_a as usize] =
-                vm.memory[vm.registers[register_b as usize] as usize];
-        } else if opcode == Opcode::STORE as u8 {
-            vm.memory[vm.registers[register_b as usize] as usize] =
-                vm.registers[register_a as usize];
-        } else if opcode == Opcode::BNE as u8 {
-            if vm.registers[register_a as usize] == vm.registers[register_b as usize] {
-                vm.pc += 1; // skip next instruction
-            } else {
-                vm.pc = vm.memory[vm.pc as usize]; // jump to next instruction
-            }
-        } else {
-            println!("Unknown operation");
-        }
-    }
-
     println!("Registers: {:?}", vm.registers);
     println!("Memory: {:?}", vm.memory);
     println!("Program execution completed!");
