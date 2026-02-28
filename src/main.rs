@@ -64,6 +64,8 @@ fn main() {
     let mut vm = VirtualMachine::new();
     let args: Vec<String> = std::env::args().collect();
 
+    let hex = args.contains(&"--hex".to_string());
+
     let instructions = args
         .iter()
         .skip(1)
