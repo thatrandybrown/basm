@@ -17,11 +17,11 @@ struct VirtualMachine {
 }
 
 impl VirtualMachine {
-    fn new(registers: usize, memory: usize) -> Self {
+    fn new() -> Self {
         VirtualMachine {
-            registers: [0; NUM_REGISTERS],
+            registers: [0; 8],
             pc: 0,
-            memory: [0; MEMORY_SIZE],
+            memory: [0; 256],
         }
     }
 
@@ -61,7 +61,7 @@ impl VirtualMachine {
 }
 
 fn main() {
-    let mut vm = VirtualMachine::new(NUM_REGISTERS, MEMORY_SIZE);
+    let mut vm = VirtualMachine::new();
     let args: Vec<String> = std::env::args().collect();
 
     let hex = args.contains(&"--hex".to_string());
