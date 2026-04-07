@@ -25,7 +25,7 @@ impl VirtualMachine {
         }
     }
 
-    fn execute(&mut self, program: &[u8]) -> &[u8; NUM_REGISTERS] {
+    fn execute(&mut self, program: &[u8]) -> &[u8] {
         for (i, opcode) in program.iter().enumerate() {
             self.memory[i] = *opcode;
         }
@@ -87,7 +87,7 @@ fn main() {
         instructions.split(',').filter_map(|s| s.trim().parse::<u8>().ok()).collect::<Vec<u8>>()
     };
 
-    let output: &[u8; NUM_REGISTERS] = vm.execute(&program);
+    let output: &[u8] = vm.execute(&program);
 
     println!("Registers: {:?}", output);
 }
