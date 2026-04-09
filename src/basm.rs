@@ -10,14 +10,14 @@ enum Opcode {
     BNE = 0b11,   // Branch if Ra != Rb
 }
 
-struct VirtualMachine {
+pub struct VirtualMachine {
     registers: [u8; NUM_REGISTERS],
     pc: u8,
     memory: [u8; MEMORY_SIZE],
 }
 
 impl VirtualMachine {
-    fn new() -> Self {
+    pub fn new() -> Self {
         VirtualMachine {
             registers: [0; NUM_REGISTERS],
             pc: 0,
@@ -25,7 +25,7 @@ impl VirtualMachine {
         }
     }
 
-    fn execute(&mut self, program: &[u8]) -> &[u8] {
+    pub fn execute(&mut self, program: &[u8]) -> &[u8] {
         for (i, opcode) in program.iter().enumerate() {
             self.memory[i] = *opcode;
         }
