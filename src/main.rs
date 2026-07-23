@@ -6,6 +6,7 @@ fn main() {
     let args: Vec<String> = std::env::args().collect();
 
     let hex = args.contains(&"--hex".to_string());
+    let repl = args.contains(&"--repl".to_string());
 
     let instructions = args
         .iter()
