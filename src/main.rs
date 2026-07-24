@@ -8,6 +8,15 @@ fn main() {
     let hex = args.contains(&"--hex".to_string());
     let repl = args.contains(&"--repl".to_string());
 
+    if repl {
+        // take input from stdin and execute it in a loop
+        let mut input = String::new();
+        loop {
+            input.clear();
+            std::io::stdin().read_line(&mut input).unwrap();
+        }
+    }
+
     let instructions = args
         .iter()
         .skip(1)
