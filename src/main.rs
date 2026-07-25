@@ -15,6 +15,7 @@ fn main() {
             input.clear();
             std::io::stdin().read_line(&mut input).unwrap();
         }
+        return;
     }
 
     let instructions = args
