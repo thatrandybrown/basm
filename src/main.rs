@@ -14,6 +14,19 @@ fn main() {
         loop {
             input.clear();
             std::io::stdin().read_line(&mut input).unwrap();
+            let program = if hex {
+                input
+                    .trim()
+                    .split(',')
+                    .filter_map(|s| u8::from_str_radix(s.trim(), 16).ok())
+                    .collect::<Vec<u8>>()
+            } else {
+                input
+                    .trim()
+                    .split(',')
+                    .filter_map(|s| s.trim().parse::<u8>().ok())
+                    .collect::<Vec<u8>>()
+            };
         }
         return;
     }
