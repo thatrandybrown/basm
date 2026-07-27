@@ -27,6 +27,8 @@ fn main() {
                     .filter_map(|s| s.trim().parse::<u8>().ok())
                     .collect::<Vec<u8>>()
             };
+            let output: &[u8] = vm.execute(&program);
+            println!("Registers: {:?}", output);
         }
         return;
     }
