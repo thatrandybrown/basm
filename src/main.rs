@@ -30,7 +30,6 @@ fn main() {
             let output: &[u8] = vm.execute(&program);
             println!("Registers: {:?}", output);
         }
-        return;
     }
 
     let instructions = args
