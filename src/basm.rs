@@ -39,7 +39,7 @@ impl VirtualMachine {
             let register_b = instruction & 0b00000111;
             if opcode == Opcode::ADD as u8 {
                 self.registers[register_a as usize] =
-                    self.registers[register_a as usize] + self.registers[register_b as usize];
+                    self.registers[register_a as usize].wrapping_add(self.registers[register_b as usize]);
             } else if opcode == Opcode::LOAD as u8 {
                 self.registers[register_a as usize] =
                     self.memory[self.registers[register_b as usize] as usize];
