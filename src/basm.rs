@@ -10,6 +10,11 @@ enum Opcode {
     BNE = 0b11,   // Branch if Ra != Rb
 }
 
+pub struct CPU {
+    pc: u8,
+    registers: [u8; NUM_REGISTERS],
+}
+
 pub struct VirtualMachine {
     registers: [u8; NUM_REGISTERS],
     pc: u8,
