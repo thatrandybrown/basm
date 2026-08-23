@@ -16,6 +16,7 @@ pub struct CPU {
 }
 
 pub struct VirtualMachine {
+    cpu: CPU,
     registers: [u8; NUM_REGISTERS],
     pc: u8,
     memory: [u8; MEMORY_SIZE],
