@@ -15,6 +15,15 @@ pub struct CPU {
     registers: [u8; NUM_REGISTERS],
 }
 
+impl CPU {
+    pub fn new() -> Self {
+        CPU {
+            pc: 0,
+            registers: [0; NUM_REGISTERS],
+        }
+    }
+}
+
 pub struct VirtualMachine {
     cpu: CPU,
     registers: [u8; NUM_REGISTERS],
