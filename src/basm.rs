@@ -22,6 +22,32 @@ impl CPU {
             registers: [0; NUM_REGISTERS],
         }
     }
+
+    pub fn step(&mut self, memory: &mut [u8; MEMORY_SIZE]) {
+        let instruction = memory[self.pc as usize];
+        self.pc += 1;
+        let opcode = instruction >> 6;
+        let register_a = (instruction >> 3) & 0b00000111;
+        let register_b = instruction & 0b00000111;
+        if opcode == Opcode::ADD as u8 {
+            self.registers[register_a as usize] =
+                self.registers[register_a as usize].wrapping_add(self.registers[register_b as usize]);
+        } else if opcode == Opcode::LOAD as u8 {
+            self.registers[register_a as usize] =
+                memory[self.registers[register_b as usize] as usize];
+        } else if opcode == Opcode::STORE as u8 {
+            memory[self.registers[register_b as usize] as usize] =
+                self.registers[register_a as usize];
+        } else if opcode == Opcode::BNE as u8 {
+            if self.registers[register_a as usize] == self.registers[register_b as usize] {
+                self.pc += 1; // skip next instruction
+            } else {
+                self.pc = memory[self.pc as usize]; // jump to next instruction
+            }
+        } else {
+            println!("Unknown operation");
+        }
+    }
 }
 
 pub struct VirtualMachine {
