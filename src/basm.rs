@@ -73,32 +73,10 @@ impl VirtualMachine {
             self.memory[i] = *opcode;
         }
 
-        while self.pc < program.len() as u8 {
-            let instruction = self.memory[self.pc as usize];
-            self.pc += 1;
-            let opcode = instruction >> 6;
-            let register_a = (instruction >> 3) & 0b00000111;
-            let register_b = instruction & 0b00000111;
-            if opcode == Opcode::ADD as u8 {
-                self.registers[register_a as usize] =
-                    self.registers[register_a as usize].wrapping_add(self.registers[register_b as usize]);
-            } else if opcode == Opcode::LOAD as u8 {
-                self.registers[register_a as usize] =
-                    self.memory[self.registers[register_b as usize] as usize];
-            } else if opcode == Opcode::STORE as u8 {
-                self.memory[self.registers[register_b as usize] as usize] =
-                    self.registers[register_a as usize];
-            } else if opcode == Opcode::BNE as u8 {
-                if self.registers[register_a as usize] == self.registers[register_b as usize] {
-                    self.pc += 1; // skip next instruction
-                } else {
-                    self.pc = self.memory[self.pc as usize]; // jump to next instruction
-                }
-            } else {
-                println!("Unknown operation");
-            }
+        while self.cpu.pc < program.len() as u8 {
+            self.cpu.step(&mut self.memory);
         }
 
-        &self.registers
+        &self.cpu.registers
     }
 }
