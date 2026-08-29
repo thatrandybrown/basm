@@ -52,8 +52,6 @@ impl CPU {
 
 pub struct VirtualMachine {
     cpu: CPU,
-    registers: [u8; NUM_REGISTERS],
-    pc: u8,
     memory: [u8; MEMORY_SIZE],
 }
 
@@ -61,8 +59,6 @@ impl VirtualMachine {
     pub fn new() -> Self {
         VirtualMachine {
             cpu: CPU::new(),
-            registers: [0; NUM_REGISTERS],
-            pc: 0,
             memory: [0; MEMORY_SIZE],
         }
     }
