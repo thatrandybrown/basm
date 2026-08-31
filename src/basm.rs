@@ -10,6 +10,12 @@ enum Opcode {
     BNE = 0b11,   // Branch if Ra != Rb
 }
 
+struct Instruction {
+    opcode: Opcode,
+    register_a: u8,
+    register_b: u8,
+}
+
 struct CPU {
     pc: u8,
     registers: [u8; NUM_REGISTERS],
