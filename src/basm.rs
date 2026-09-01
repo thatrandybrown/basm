@@ -54,6 +54,12 @@ impl CPU {
             println!("Unknown operation");
         }
     }
+
+    fn fetch(&mut self, memory: &[u8; MEMORY_SIZE]) -> u8 {
+        let instruction = memory[self.pc as usize];
+        self.pc += 1;
+        instruction
+    }
 }
 
 pub struct VirtualMachine {
