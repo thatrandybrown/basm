@@ -59,6 +59,23 @@ impl CPU {
         self.pc += 1;
         instruction
     }
+
+    fn decode(instruction: u8) -> Instruction {
+        let opcode = match instruction >> 6 {
+            0b00 => Opcode::ADD,
+            0b01 => Opcode::LOAD,
+            0b10 => Opcode::STORE,
+            0b11 => Opcode::BNE,
+            _ => panic!("Unknown opcode"),
+        };
+        let register_a = (instruction >> 3) & 0b00000111;
+        let register_b = instruction & 0b00000111;
+        Instruction {
+            opcode,
+            register_a,
+            register_b,
+        }
+    }
 }
 
 pub struct VirtualMachine {
