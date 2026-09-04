@@ -33,9 +33,9 @@ impl CPU {
         let instruction = self.fetch(memory);
         let decoded_instruction = self.decode(instruction);
 
-        let opcode = instruction >> 6;
-        let register_a = (instruction >> 3) & 0b00000111;
-        let register_b = instruction & 0b00000111;
+        let opcode = decoded_instruction.opcode as u8;
+        let register_a = decoded_instruction.register_a;
+        let register_b = decoded_instruction.register_b;
         if opcode == Opcode::ADD as u8 {
             self.registers[register_a as usize] =
                 self.registers[register_a as usize].wrapping_add(self.registers[register_b as usize]);
