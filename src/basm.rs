@@ -31,6 +31,8 @@ impl CPU {
 
     pub fn step(&mut self, memory: &mut [u8; MEMORY_SIZE]) {
         let instruction = self.fetch(memory);
+        let decoded_instruction = self.decode(instruction);
+
         let opcode = instruction >> 6;
         let register_a = (instruction >> 3) & 0b00000111;
         let register_b = instruction & 0b00000111;
