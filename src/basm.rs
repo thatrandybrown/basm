@@ -32,28 +32,7 @@ impl CPU {
     pub fn step(&mut self, memory: &mut [u8; MEMORY_SIZE]) {
         let instruction = self.fetch(memory);
         let decoded_instruction = self.decode(instruction);
-
-        let opcode = decoded_instruction.opcode as u8;
-        let register_a = decoded_instruction.register_a;
-        let register_b = decoded_instruction.register_b;
-        if opcode == Opcode::ADD as u8 {
-            self.registers[register_a as usize] =
-                self.registers[register_a as usize].wrapping_add(self.registers[register_b as usize]);
-        } else if opcode == Opcode::LOAD as u8 {
-            self.registers[register_a as usize] =
-                memory[self.registers[register_b as usize] as usize];
-        } else if opcode == Opcode::STORE as u8 {
-            memory[self.registers[register_b as usize] as usize] =
-                self.registers[register_a as usize];
-        } else if opcode == Opcode::BNE as u8 {
-            if self.registers[register_a as usize] == self.registers[register_b as usize] {
-                self.pc += 1; // skip next instruction
-            } else {
-                self.pc = memory[self.pc as usize]; // jump to next instruction
-            }
-        } else {
-            println!("Unknown operation");
-        }
+        self.execute(decoded_instruction, memory);
     }
 
     fn fetch(&mut self, memory: &[u8; MEMORY_SIZE]) -> u8 {
