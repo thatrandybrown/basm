@@ -59,26 +59,25 @@ impl CPU {
     }
 
     fn execute(&mut self, instruction: Instruction, memory: &mut [u8; MEMORY_SIZE]) {
-        let opcode = instruction.opcode as u8;
+        let opcode = instruction.opcode;
         let register_a = instruction.register_a;
         let register_b = instruction.register_b;
-        if opcode == Opcode::ADD as u8 {
-            self.registers[register_a as usize] =
-                self.registers[register_a as usize].wrapping_add(self.registers[register_b as usize]);
-        } else if opcode == Opcode::LOAD as u8 {
-            self.registers[register_a as usize] =
-                memory[self.registers[register_b as usize] as usize];
-        } else if opcode == Opcode::STORE as u8 {
-            memory[self.registers[register_b as usize] as usize] =
-                self.registers[register_a as usize];
-        } else if opcode == Opcode::BNE as u8 {
-            if self.registers[register_a as usize] == self.registers[register_b as usize] {
-                self.pc += 1; // skip next instruction
-            } else {
-                self.pc = memory[self.pc as usize]; // jump to next instruction
+
+        match opcode {
+            Opcode::ADD => self.registers[register_a as usize] =
+                self.registers[register_a as usize].wrapping_add(self.registers[register_b as usize]),
+            Opcode::LOAD => self.registers[register_a as usize] =
+                memory[self.registers[register_b as usize] as usize],
+            Opcode::STORE => memory[self.registers[register_b as usize] as usize] =
+                self.registers[register_a as usize],
+            Opcode::BNE => {
+                if self.registers[register_a as usize] == self.registers[register_b as usize] {
+                    self.pc += 1; // skip next instruction
+                } else {
+                    self.pc = memory[self.pc as usize]; // jump to next instruction
+                }
             }
-        } else {
-            println!("Unknown operation");
+            _ => println!("Unknown operation"),
         }
     }
 }
