@@ -16,6 +16,14 @@ struct Instruction {
     register_b: u8,
 }
 
+struct ALU {}
+
+impl ALU {
+    pub fn add(a: u8, b: u8) -> u8 {
+        a.wrapping_add(b)
+    }
+}
+
 struct CPU {
     pc: u8,
     registers: [u8; NUM_REGISTERS],
