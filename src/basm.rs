@@ -75,12 +75,18 @@ impl CPU {
         let register_b = instruction.register_b;
 
         match opcode {
-            Opcode::ADD => self.registers[register_a as usize] =
-                self.registers[register_a as usize].wrapping_add(self.registers[register_b as usize]),
-            Opcode::LOAD => self.registers[register_a as usize] =
-                memory[self.registers[register_b as usize] as usize],
-            Opcode::STORE => memory[self.registers[register_b as usize] as usize] =
-                self.registers[register_a as usize],
+            Opcode::ADD => {
+                self.registers[register_a as usize] = self.registers[register_a as usize]
+                    .wrapping_add(self.registers[register_b as usize])
+            }
+            Opcode::LOAD => {
+                self.registers[register_a as usize] =
+                    memory[self.registers[register_b as usize] as usize]
+            }
+            Opcode::STORE => {
+                memory[self.registers[register_b as usize] as usize] =
+                    self.registers[register_a as usize]
+            }
             Opcode::BNE => {
                 if self.registers[register_a as usize] == self.registers[register_b as usize] {
                     self.pc += 1; // skip next instruction
