@@ -90,7 +90,10 @@ impl CPU {
                     self.registers[register_a as usize]
             }
             Opcode::BNE => {
-                if self.registers[register_a as usize] == self.registers[register_b as usize] {
+                if ALU::compare(
+                    self.registers[register_a as usize],
+                    self.registers[register_b as usize],
+                ) {
                     self.pc += 1; // skip next instruction
                 } else {
                     self.pc = memory[self.pc as usize]; // jump to next instruction
