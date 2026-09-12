@@ -76,8 +76,10 @@ impl CPU {
 
         match opcode {
             Opcode::ADD => {
-                self.registers[register_a as usize] = self.registers[register_a as usize]
-                    .wrapping_add(self.registers[register_b as usize])
+                self.registers[register_a as usize] = ALU::add(
+                    self.registers[register_a as usize],
+                    self.registers[register_b as usize],
+                );
             }
             Opcode::LOAD => {
                 self.registers[register_a as usize] =
