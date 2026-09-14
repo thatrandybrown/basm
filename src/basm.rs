@@ -23,7 +23,7 @@ impl ALU {
         a.wrapping_add(b)
     }
     pub fn compare(a: u8, b: u8) -> bool {
-        a != b
+        a == b
     }
 }
 
