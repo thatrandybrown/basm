@@ -22,7 +22,7 @@ impl ALU {
     pub fn add(a: u8, b: u8) -> u8 {
         a.wrapping_add(b)
     }
-    pub fn compare(a: u8, b: u8) -> bool {
+    pub fn equal(a: u8, b: u8) -> bool {
         a == b
     }
 }
@@ -90,7 +90,7 @@ impl CPU {
                     self.registers[register_a as usize]
             }
             Opcode::BNE => {
-                if ALU::compare(
+                if ALU::equal(
                     self.registers[register_a as usize],
                     self.registers[register_b as usize],
                 ) {
