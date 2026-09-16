@@ -102,6 +102,10 @@ impl CPU {
             _ => println!("Unknown operation"),
         }
     }
+
+    fn increment_pc(&mut self) {
+        self.pc = self.pc.wrapping_add(1);
+    }
 }
 
 pub struct VirtualMachine {
