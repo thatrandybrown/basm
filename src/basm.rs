@@ -48,7 +48,7 @@ impl CPU {
 
     fn fetch(&mut self, memory: &[u8; MEMORY_SIZE]) -> u8 {
         let instruction = memory[self.pc as usize];
-        self.pc += 1;
+        self.increment_pc();
         instruction
     }
 
@@ -94,7 +94,7 @@ impl CPU {
                     self.registers[register_a as usize],
                     self.registers[register_b as usize],
                 ) {
-                    self.pc += 1; // skip next instruction
+                    self.increment_pc(); // skip next instruction
                 } else {
                     self.pc = memory[self.pc as usize]; // jump to next instruction
                 }
