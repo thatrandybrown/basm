@@ -121,6 +121,12 @@ impl VirtualMachine {
         }
     }
 
+    pub fn load(&mut self, program: &[u8]) {
+        for (i, opcode) in program.iter().enumerate() {
+            self.memory[i] = *opcode;
+        }
+    }
+
     pub fn execute(&mut self, program: &[u8]) -> &[u8] {
         for (i, opcode) in program.iter().enumerate() {
             self.memory[i] = *opcode;
