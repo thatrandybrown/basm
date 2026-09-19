@@ -46,6 +46,10 @@ impl CPU {
         self.execute(decoded_instruction, memory);
     }
 
+    pub fn reset_pc(&mut self) {
+        self.pc = 0;
+    }
+
     fn fetch(&mut self, memory: &[u8; MEMORY_SIZE]) -> u8 {
         let instruction = memory[self.pc as usize];
         self.increment_pc();
