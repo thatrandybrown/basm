@@ -129,6 +129,7 @@ impl VirtualMachine {
         for (i, opcode) in program.iter().enumerate() {
             self.memory[i] = *opcode;
         }
+        self.cpu.reset_pc();
     }
 
     pub fn execute(&mut self, program: &[u8]) -> &[u8] {
