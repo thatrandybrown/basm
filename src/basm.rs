@@ -22,6 +22,7 @@ impl ALU {
     pub fn add(a: u8, b: u8) -> u8 {
         a.wrapping_add(b)
     }
+
     pub fn equal(a: u8, b: u8) -> bool {
         a == b
     }
@@ -56,7 +57,7 @@ impl CPU {
         instruction
     }
 
-    fn decode(instruction: u8) -> Instruction {
+    fn decode(&self, instruction: u8) -> Instruction {
         let opcode = match instruction >> 6 {
             0b00 => Opcode::ADD,
             0b01 => Opcode::LOAD,
