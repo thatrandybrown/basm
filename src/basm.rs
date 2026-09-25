@@ -147,7 +147,8 @@ impl VirtualMachine {
 
     pub fn start(&mut self) {
         self.cpu.reset_pc();
-        loop {
+        self.running = true;
+        while self.running {
             self.cpu.step(&mut self.memory);
         }
     }
