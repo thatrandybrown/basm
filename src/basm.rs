@@ -152,4 +152,8 @@ impl VirtualMachine {
             self.cpu.step(&mut self.memory);
         }
     }
+
+    pub fn stop(&mut self) {
+        self.running = false;
+    }
 }
