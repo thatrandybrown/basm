@@ -3,8 +3,9 @@ an assembly machine
 
 ## Structure
 
-8 8bit registers
-256 memory entries
+- 8 general-purpose 8-bit registers (`R0`–`R7`)
+- 256 bytes of memory, shared by program and data
+- 8-bit program counter (PC)
 
 ## Instruction Set
 
