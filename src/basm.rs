@@ -1,3 +1,6 @@
+use std::sync::{Arc};
+use std::sync::atomic::{AtomicBool, Ordering};
+
 const NUM_REGISTERS: usize = 8;
 const MEMORY_SIZE: usize = 256;
 
