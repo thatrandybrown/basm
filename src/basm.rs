@@ -119,7 +119,7 @@ impl CPU {
 pub struct VirtualMachine {
     cpu: CPU,
     memory: [u8; MEMORY_SIZE],
-    running: bool,
+    running: Arc<AtomicBool>,
 }
 
 impl VirtualMachine {
@@ -127,7 +127,7 @@ impl VirtualMachine {
         VirtualMachine {
             cpu: CPU::new(),
             memory: [0; MEMORY_SIZE],
-            running: false,
+            running: Arc::new(AtomicBool::new(false)),
         }
     }
 
