@@ -150,13 +150,13 @@ impl VirtualMachine {
 
     pub fn start(&mut self) {
         self.cpu.reset_pc();
-        self.running = true;
-        while self.running {
+        self.running.store(true, Ordering::SeqCst);
+        while self.running.load(Ordering::SeqCst) {
             self.cpu.step(&mut self.memory);
         }
     }
 
     pub fn stop(&mut self) {
-        self.running = false;
+        self.running.store(false, Ordering::SeqCst);
     }
 }
