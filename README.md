@@ -17,4 +17,13 @@ register A index, and a 3-bit register B index.
 | `00`   | `00aaabbb` | ADD      | `Ra = Ra + Rb` (wraps on overflow) |
 | `01`   | `01aaabbb` | LOAD     | `Ra = memory[Rb]`                |
 | `10`   | `10aaabbb` | STORE    | `memory[Rb] = Ra`                |
-| `11`   | `11aaabbb` | BNE      | compare `Ra` and `Rb` |
+| `11`   | `11aaabbb` | BNE      | compare `Ra` and `Rb`, see below |
+
+### BNE
+
+`BNE` also consumes the byte in memory immediately after the
+instruction, which is treated as a jump target address, not as a separate
+instruction.
+
+- If `Ra == Rb`: PC is set to that byte's value (jump taken).
+- If `Ra != Rb`: PC advances past that byte without jumping (fall through).
