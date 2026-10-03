@@ -27,3 +27,15 @@ instruction.
 
 - If `Ra == Rb`: PC is set to that byte's value (jump taken).
 - If `Ra != Rb`: PC advances past that byte without jumping (fall through).
+
+## Running
+
+```
+cargo run -- <bytes>            # decimal, comma-separated
+cargo run -- --hex <bytes>      # hex, comma-separated
+cargo run -- --repl [--hex]     # read one program per line from stdin
+```
+
+A program is a comma-separated list of byte values, loaded into memory
+starting at address 0. Execution runs until PC reaches the end of the
+loaded bytes. The final register state is printed.
