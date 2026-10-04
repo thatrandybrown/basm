@@ -1,5 +1,6 @@
 # basm
-an assembly machine
+
+A minimal 8-bit CPU and virtual machine
 
 ## Structure
 
