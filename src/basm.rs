@@ -148,7 +148,7 @@ impl VirtualMachine {
         &self.cpu.registers
     }
 
-    pub fn start(&mut self) {
+    pub fn start(mut self) {
         self.cpu.reset_pc();
         self.running.store(true, Ordering::SeqCst);
         while self.running.load(Ordering::SeqCst) {
