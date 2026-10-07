@@ -1,4 +1,5 @@
 use std::sync::{Arc};
+use std::thread;
 use std::sync::atomic::{AtomicBool, Ordering};
 
 const NUM_REGISTERS: usize = 8;
