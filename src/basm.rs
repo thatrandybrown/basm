@@ -123,6 +123,10 @@ pub struct VirtualMachine {
     running: Arc<AtomicBool>,
 }
 
+pub struct VmHandle {
+    join: thread::JoinHandle<VirtualMachine>
+}
+
 impl VirtualMachine {
     pub fn new() -> Self {
         VirtualMachine {
